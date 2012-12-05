@@ -1,0 +1,7 @@
+package statistic.constants;
+
+public enum StatisticKey {
+    NUM_ATTEMPTED_ATTACKS, NUM_HITS, DMG_DONE,
+    NUM_KILLS, NUM_FIRST_HIT_KILLS, NUM_ASSISTS, NUM_SPELL_CASTS,
+    SPELL_DMG, TIME_PLAYED, WINS, LOSSES
+}
