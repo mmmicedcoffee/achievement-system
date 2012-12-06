@@ -3,7 +3,6 @@ package achievement.awards;
 import org.junit.Before;
 import org.junit.Test;
 import statistic.StatSet;
-import statistic.Statistic;
 
 import static achievement.awards.BigWinnerAward.THRESHOLD;
 import static org.easymock.EasyMock.createMock;
@@ -30,7 +29,7 @@ public class BigWinnerAwardTest {
     @Test
     public void testEvaluateTrue() {
         expect(stats.getAttribute()).andReturn(LIFETIME);
-        expect(stats.getStatistic(WINS)).andReturn(new Statistic(WINS, THRESHOLD + OFFSET));
+        expect(stats.getStat(WINS)).andReturn(THRESHOLD + OFFSET);
         replay(stats);
         assertTrue(award.evaluate(stats));
         verify(stats);
@@ -39,7 +38,7 @@ public class BigWinnerAwardTest {
     @Test
     public void testEvaluateFalse() {
         expect(stats.getAttribute()).andReturn(LIFETIME);
-        expect(stats.getStatistic(WINS)).andReturn(new Statistic(WINS, THRESHOLD - OFFSET));
+        expect(stats.getStat(WINS)).andReturn(THRESHOLD - OFFSET);
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);

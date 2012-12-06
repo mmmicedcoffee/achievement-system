@@ -3,7 +3,6 @@ package achievement.awards;
 import org.junit.Before;
 import org.junit.Test;
 import statistic.StatSet;
-import statistic.Statistic;
 
 import static achievement.awards.SharpshooterAward.THRESHOLD;
 import static org.easymock.EasyMock.createMock;
@@ -32,8 +31,8 @@ public class SharpshooterAwardTest {
     @Test
     public void testEvaluateTrue() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStatistic(ATTEMPTED_HITS)).andReturn(new Statistic(ATTEMPTED_HITS, N));
-        expect(stats.getStatistic(HITS)).andReturn(new Statistic(HITS, (int) Math.round((THRESHOLD + OFFSET) * N)));
+        expect(stats.getStat(ATTEMPTED_HITS)).andReturn(N);
+        expect(stats.getStat(HITS)).andReturn((int) Math.round((THRESHOLD + OFFSET) * N));
         replay(stats);
         assertTrue(award.evaluate(stats));
         verify(stats);
@@ -42,8 +41,8 @@ public class SharpshooterAwardTest {
     @Test
     public void testEvaluateFalse() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStatistic(ATTEMPTED_HITS)).andReturn(new Statistic(ATTEMPTED_HITS, N));
-        expect(stats.getStatistic(HITS)).andReturn(new Statistic(HITS, (int) Math.round((THRESHOLD - OFFSET) * N)));
+        expect(stats.getStat(ATTEMPTED_HITS)).andReturn(N);
+        expect(stats.getStat(HITS)).andReturn((int) Math.round((THRESHOLD - OFFSET) * N));
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);

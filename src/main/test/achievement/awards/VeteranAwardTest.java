@@ -3,7 +3,6 @@ package achievement.awards;
 import org.junit.Before;
 import org.junit.Test;
 import statistic.StatSet;
-import statistic.Statistic;
 
 import static achievement.awards.VeteranAward.THRESHOLD;
 import static org.easymock.EasyMock.createMock;
@@ -32,8 +31,8 @@ public class VeteranAwardTest {
     @Test
     public void testEvaluateTrue() {
         expect(stats.getAttribute()).andReturn(LIFETIME);
-        expect(stats.getStatistic(WINS)).andReturn(new Statistic(WINS, HALF_THRESHOLD + OFFSET));
-        expect(stats.getStatistic(LOSSES)).andReturn(new Statistic(LOSSES, HALF_THRESHOLD + OFFSET));
+        expect(stats.getStat(WINS)).andReturn(HALF_THRESHOLD + OFFSET);
+        expect(stats.getStat(LOSSES)).andReturn(HALF_THRESHOLD + OFFSET);
         replay(stats);
         assertTrue(award.evaluate(stats));
         verify(stats);
@@ -42,8 +41,8 @@ public class VeteranAwardTest {
     @Test
     public void testEvaluateFalse() {
         expect(stats.getAttribute()).andReturn(LIFETIME);
-        expect(stats.getStatistic(WINS)).andReturn(new Statistic(WINS, HALF_THRESHOLD - OFFSET));
-        expect(stats.getStatistic(LOSSES)).andReturn(new Statistic(LOSSES, HALF_THRESHOLD - OFFSET));
+        expect(stats.getStat(WINS)).andReturn(HALF_THRESHOLD - OFFSET);
+        expect(stats.getStat(LOSSES)).andReturn(HALF_THRESHOLD - OFFSET);
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);

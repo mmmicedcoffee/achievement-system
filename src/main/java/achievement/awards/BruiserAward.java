@@ -14,7 +14,7 @@ public class BruiserAward implements Achievement {
         if (aStatSet.getAttribute() != GAME) {
             return false;
         }
-        return aStatSet.getStatistic(DMG_DONE).getValue() > THRESHOLD;
+        return aStatSet.getStat(DMG_DONE) > THRESHOLD;
     }
 
     @Override

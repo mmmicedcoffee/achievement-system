@@ -17,7 +17,7 @@ public class StatSetTest {
     public void testInitLifetimeSet() {
         final StatSet statistics = new StatSet(LIFETIME);
         for (StatKey key : StatKey.values()) {
-            assertEquals(INITIAL_STAT_VALUE, statistics.getStatisticValue(key));
+            assertEquals(INITIAL_STAT_VALUE, statistics.getStat(key));
         }
         assertEquals(LIFETIME, statistics.getAttribute());
     }
@@ -26,7 +26,7 @@ public class StatSetTest {
     public void testInitGameSet() {
         final StatSet statistics = new StatSet(GAME);
         for (StatKey key : StatKey.values()) {
-            assertEquals(INITIAL_STAT_VALUE, statistics.getStatisticValue(key));
+            assertEquals(INITIAL_STAT_VALUE, statistics.getStat(key));
         }
         assertEquals(GAME, statistics.getAttribute());
     }
@@ -37,9 +37,9 @@ public class StatSetTest {
         statistics.update(TEST_STAT, UPDATED_STAT_VALUE);
         for (StatKey key : StatKey.values()) {
             if (key == TEST_STAT) {
-                assertEquals(UPDATED_STAT_VALUE, statistics.getStatisticValue(key));
+                assertEquals(UPDATED_STAT_VALUE, statistics.getStat(key));
             } else {
-                assertEquals(INITIAL_STAT_VALUE, statistics.getStatisticValue(key));
+                assertEquals(INITIAL_STAT_VALUE, statistics.getStat(key));
             }
         }
         assertEquals(LIFETIME, statistics.getAttribute());
@@ -51,9 +51,9 @@ public class StatSetTest {
         statistics.update(TEST_STAT, UPDATED_STAT_VALUE);
         for (StatKey key : StatKey.values()) {
             if (key == TEST_STAT) {
-                assertEquals(UPDATED_STAT_VALUE, statistics.getStatisticValue(key));
+                assertEquals(UPDATED_STAT_VALUE, statistics.getStat(key));
             } else {
-                assertEquals(INITIAL_STAT_VALUE, statistics.getStatisticValue(key));
+                assertEquals(INITIAL_STAT_VALUE, statistics.getStat(key));
             }
         }
         assertEquals(GAME, statistics.getAttribute());

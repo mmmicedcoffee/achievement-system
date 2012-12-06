@@ -15,9 +15,9 @@ public class SharpshooterAward implements Achievement {
         if (aStatSet.getAttribute() != GAME) {
             return false;
         }
-        final int attempted = aStatSet.getStatistic(ATTEMPTED_HITS).getValue();
+        final int attempted = aStatSet.getStat(ATTEMPTED_HITS);
         if (attempted == 0) return false;
-        final int hit = aStatSet.getStatistic(HITS).getValue();
+        final int hit = aStatSet.getStat(HITS);
         return (hit / (float) attempted) >= THRESHOLD;
     }
 

@@ -15,7 +15,7 @@ public class VeteranAward implements Achievement {
         if (aStatSet.getAttribute() != LIFETIME) {
             return false;
         }
-        return (aStatSet.getStatistic(WINS).getValue() + aStatSet.getStatistic(LOSSES).getValue()) >= THRESHOLD;
+        return (aStatSet.getStat(WINS) + aStatSet.getStat(LOSSES)) >= THRESHOLD;
     }
 
     @Override

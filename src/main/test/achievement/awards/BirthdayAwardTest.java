@@ -3,7 +3,6 @@ package achievement.awards;
 import org.junit.Before;
 import org.junit.Test;
 import statistic.StatSet;
-import statistic.Statistic;
 
 import static achievement.awards.BirthdayAward.EXPECTED_ASSISTS;
 import static achievement.awards.BirthdayAward.EXPECTED_KILLS;
@@ -32,8 +31,8 @@ public class BirthdayAwardTest {
     @Test
     public void testEvaluateTrue() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStatistic(KILLS)).andReturn(new Statistic(KILLS, EXPECTED_KILLS));
-        expect(stats.getStatistic(ASSISTS)).andReturn(new Statistic(ASSISTS, EXPECTED_ASSISTS));
+        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS);
+        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS);
         replay(stats);
         assertTrue(award.evaluate(stats));
         verify(stats);
@@ -42,8 +41,8 @@ public class BirthdayAwardTest {
     @Test
     public void testEvaluateIncorrectKills() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStatistic(KILLS)).andReturn(new Statistic(KILLS, EXPECTED_KILLS + 1));
-        expect(stats.getStatistic(ASSISTS)).andReturn(new Statistic(ASSISTS, EXPECTED_ASSISTS));
+        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS + 1);
+        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS);
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);
@@ -52,8 +51,8 @@ public class BirthdayAwardTest {
     @Test
     public void testEvaluateIncorrectAssists() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStatistic(KILLS)).andReturn(new Statistic(KILLS, EXPECTED_KILLS));
-        expect(stats.getStatistic(ASSISTS)).andReturn(new Statistic(ASSISTS, EXPECTED_ASSISTS + 1));
+        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS);
+        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS + 1);
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);

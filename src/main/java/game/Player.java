@@ -3,13 +3,14 @@ package game;
 import achievement.Achievement;
 import achievement.AchievementSetFactory;
 import statistic.StatSet;
-import statistic.Statistic;
+import statistic.constants.StatKey;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
+import static java.util.Map.Entry;
 import static statistic.constants.StatAttribute.LIFETIME;
 
 public class Player {
@@ -34,8 +35,8 @@ public class Player {
 
     public void updateStats(StatSet gameStats) {
         lastGameStats = gameStats;
-        for (Statistic stat : gameStats) {
-            lifetimeStats.update(stat);
+        for (Entry stat : gameStats) {
+            lifetimeStats.update((StatKey) stat.getKey(), (Integer) stat.getValue());
         }
     }
 

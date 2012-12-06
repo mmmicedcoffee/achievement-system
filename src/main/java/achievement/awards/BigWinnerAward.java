@@ -14,7 +14,7 @@ public class BigWinnerAward implements Achievement {
         if (aStatSet.getAttribute() != LIFETIME) {
             return false;
         }
-        return aStatSet.getStatistic(WINS).getValue() >= THRESHOLD;
+        return aStatSet.getStat(WINS) >= THRESHOLD;
     }
 
     @Override

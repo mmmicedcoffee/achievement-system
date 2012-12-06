@@ -21,8 +21,8 @@ public class BirthdayAward implements Achievement {
         if (aStatSet.getAttribute() != GAME) {
             return false;
         }
-        final int numKills = aStatSet.getStatistic(KILLS).getValue();
-        final int numAssists = aStatSet.getStatistic(ASSISTS).getValue();
+        final int numKills = aStatSet.getStat(KILLS);
+        final int numAssists = aStatSet.getStat(ASSISTS);
         return ((numKills == EXPECTED_KILLS) && (numAssists == EXPECTED_ASSISTS));
     }
 
