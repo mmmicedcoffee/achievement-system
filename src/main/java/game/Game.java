@@ -21,7 +21,7 @@ public class Game {
     }
 
     public void playGame() throws Exception {
-        System.out.println("NEW GAME");
+        System.out.println("\nNEW GAME");
         System.out.println("--------");
         final Random random = new Random();
         final StatSetFactory factory = new StatSetFactory();

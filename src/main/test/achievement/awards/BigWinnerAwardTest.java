@@ -16,7 +16,7 @@ import static statistic.constants.StatAttribute.LIFETIME;
 import static statistic.constants.StatKey.WINS;
 
 public class BigWinnerAwardTest {
-    public static final int OFFSET = 100;
+    private static final int OFFSET = 100;
     private BigWinnerAward award;
     private StatSet stats;
 

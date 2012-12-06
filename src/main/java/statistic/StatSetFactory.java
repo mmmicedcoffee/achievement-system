@@ -1,17 +1,17 @@
 package statistic;
 
-import statistic.constants.StatAttribute;
-
 import java.util.Random;
 
+import static statistic.constants.StatAttribute.GAME;
 import static statistic.constants.StatKey.*;
 import static statistic.constants.StatParameters.MAX_DMG;
 import static statistic.constants.StatParameters.MAX_KILLS;
 import static statistic.constants.StatParameters.MAX_NUM_HITS;
+import static statistic.constants.StatParameters.MAX_RECALLS;
 
 public class StatSetFactory {
     public StatSet generateRandomGameStats(boolean win, int gameLength) {
-        final StatSet statistics = new StatSet(StatAttribute.GAME);
+        final StatSet statistics = new StatSet(GAME);
         // record win/loss
         if (win) {
             statistics.update(WINS, 1);
@@ -36,6 +36,7 @@ public class StatSetFactory {
         final int spellCasts = random.nextInt(MAX_NUM_HITS);
         statistics.update(SPELL_CASTS, spellCasts);
         statistics.update(SPELL_DMG, spellCasts == 0 ? 0 : random.nextInt(MAX_DMG));
+        statistics.update(RECALLS, random.nextInt(MAX_RECALLS));
         return statistics;
     }
 }

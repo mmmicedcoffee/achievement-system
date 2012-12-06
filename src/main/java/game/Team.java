@@ -13,6 +13,7 @@ public class Team {
         this.players = players;
     }
 
+    // factory method for use in driver
     public static Team createTeam(String name, int size) {
         final Player[] somePlayers = new Player[size];
         for (int i = 0; i < size; i++) {

@@ -17,8 +17,8 @@ import static statistic.constants.StatKey.LOSSES;
 import static statistic.constants.StatKey.WINS;
 
 public class VeteranAwardTest {
-    public static final int OFFSET = 100;
-    public static final int HALF_THRESHOLD = (int) Math.round(0.5 * THRESHOLD);
+    private static final int OFFSET = 100;
+    private static final int HALF_THRESHOLD = (int) Math.round(0.5 * THRESHOLD);
     private VeteranAward award;
     private StatSet stats;
 

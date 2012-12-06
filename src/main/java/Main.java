@@ -11,8 +11,10 @@ public class Main {
     public static void main(String[] args) {
         // make a game
         Game game = new Game(createTeam(TEAM_A_NAME, TEAM_SIZE), createTeam(TEAM_B_NAME, TEAM_SIZE));
+        // uncomment below to turn on verbose logging
+        // game.setVerbose(true);
 
-        // play a game - should update stats
+        // play a few games - should update stats
         try {
             for (int i = 0; i < NUM_GAMES; i++) {
                 game.playGame();

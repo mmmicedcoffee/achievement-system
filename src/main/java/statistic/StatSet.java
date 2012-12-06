@@ -34,6 +34,10 @@ public class StatSet implements Iterable<Entry<StatKey, Integer>> {
         }
     }
 
+    public void setStat(StatKey key, int value) {
+        statistics.put(key, value);
+    }
+
     public int getStat(StatKey key) {
         assert (statistics.containsKey(key));
         return statistics.get(key);

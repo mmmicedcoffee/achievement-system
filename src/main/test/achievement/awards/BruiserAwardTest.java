@@ -16,7 +16,7 @@ import static statistic.constants.StatAttribute.LIFETIME;
 import static statistic.constants.StatKey.DMG_DONE;
 
 public class BruiserAwardTest {
-    public static final int OFFSET = 100;
+    private static final int OFFSET = 100;
     private BruiserAward award;
     private StatSet stats;
 

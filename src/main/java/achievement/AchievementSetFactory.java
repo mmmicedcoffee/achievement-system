@@ -1,9 +1,6 @@
 package achievement;
 
-import achievement.awards.BigWinnerAward;
-import achievement.awards.BruiserAward;
-import achievement.awards.SharpshooterAward;
-import achievement.awards.VeteranAward;
+import achievement.awards.*;
 
 import java.util.HashSet;
 
@@ -16,6 +13,7 @@ public class AchievementSetFactory {
         achievements.add(new BruiserAward());
         achievements.add(new SharpshooterAward());
         achievements.add(new VeteranAward());
+        achievements.add(new HomesickAward());
 
         return achievements;
     }

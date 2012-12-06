@@ -17,8 +17,8 @@ import static statistic.constants.StatKey.ATTEMPTED_HITS;
 import static statistic.constants.StatKey.HITS;
 
 public class SharpshooterAwardTest {
-    public static final double OFFSET = 0.1;
-    public static final int N = 100;
+    private static final double OFFSET = 0.1;
+    private static final int N = 100;
     private SharpshooterAward award;
     private StatSet stats;
 

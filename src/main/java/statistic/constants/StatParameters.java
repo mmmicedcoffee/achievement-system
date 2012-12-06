@@ -7,4 +7,5 @@ public enum StatParameters {
     public static final int MAX_NUM_HITS = 1000;
     public static final int MAX_DMG = 1000;
     public static final int MAX_KILLS = 30;
+    public static final int MAX_RECALLS = 20;
 }

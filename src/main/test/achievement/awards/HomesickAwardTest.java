@@ -4,8 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import statistic.StatSet;
 
-import static achievement.awards.BirthdayAward.EXPECTED_ASSISTS;
-import static achievement.awards.BirthdayAward.EXPECTED_KILLS;
+import static achievement.awards.HomesickAward.THRESHOLD;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
@@ -14,45 +13,32 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static statistic.constants.StatAttribute.GAME;
 import static statistic.constants.StatAttribute.LIFETIME;
-import static statistic.constants.StatKey.ASSISTS;
-import static statistic.constants.StatKey.KILLS;
+import static statistic.constants.StatKey.RECALLS;
 
-public class BirthdayAwardTest {
-    public static final int OFFSET = 1;
-    private BirthdayAward award;
+public class HomesickAwardTest {
+    private static final int OFFSET = 1;
+    private HomesickAward award;
     private StatSet stats;
 
     @Before
     public void before() {
-        award = new BirthdayAward();
+        award = new HomesickAward();
         stats = createMock(StatSet.class);
     }
 
     @Test
     public void testEvaluateTrue() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS);
-        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS);
+        expect(stats.getStat(RECALLS)).andReturn(THRESHOLD);
         replay(stats);
         assertTrue(award.evaluate(stats));
         verify(stats);
     }
 
     @Test
-    public void testEvaluateIncorrectKills() {
+    public void testEvaluateFalse() {
         expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS + 1);
-        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS);
-        replay(stats);
-        assertFalse(award.evaluate(stats));
-        verify(stats);
-    }
-
-    @Test
-    public void testEvaluateIncorrectAssists() {
-        expect(stats.getAttribute()).andReturn(GAME);
-        expect(stats.getStat(KILLS)).andReturn(EXPECTED_KILLS);
-        expect(stats.getStat(ASSISTS)).andReturn(EXPECTED_ASSISTS + 1);
+        expect(stats.getStat(RECALLS)).andReturn(THRESHOLD - OFFSET);
         replay(stats);
         assertFalse(award.evaluate(stats));
         verify(stats);

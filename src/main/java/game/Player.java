@@ -28,6 +28,7 @@ public class Player {
         this.awardsEarned = newHashSet();
     }
 
+    // factory method for creating new player quickly
     public static Player createPlayer(String name) {
         final AchievementSetFactory achievementSetFactory = new AchievementSetFactory();
         return new Player(name, new StatSet(LIFETIME), achievementSetFactory.createFullAchievementSet());
@@ -49,17 +50,16 @@ public class Player {
 
         for (Achievement award : possibleAwards) {
             if (award.evaluate(lifetimeStats)) {
-                awardsEarned.add(award);
                 newlyEarnedAwards.add(award);
             }
             if (award.evaluate(lastGameStats)) {
-                awardsEarned.add(award);
                 newlyEarnedAwards.add(award);
             }
         }
 
         for (Achievement award : newlyEarnedAwards) {
             possibleAwards.remove(award);
+            awardsEarned.add(award);
             System.out.print(name + ": ");
             award.claim();
         }
@@ -67,5 +67,9 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public int getStat(StatKey key) {
+        return lifetimeStats.getStat(key);
     }
 }
