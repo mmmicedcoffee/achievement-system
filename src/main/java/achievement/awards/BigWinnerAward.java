@@ -1,15 +1,20 @@
 package achievement.awards;
 
 import achievement.Achievement;
-import statistic.StatisticSet;
-import statistic.constants.StatisticKey;
+import statistic.StatSet;
 
-import static statistic.constants.StatisticKey.WINS;
+import static statistic.constants.StatAttribute.LIFETIME;
+import static statistic.constants.StatKey.WINS;
 
 public class BigWinnerAward implements Achievement {
+    public static final int THRESHOLD = 200;
+
     @Override
-    public boolean evaluate(StatisticSet aStatisticSet) {
-        return aStatisticSet.getStatistic(WINS).getValue() >= 200d;
+    public boolean evaluate(StatSet aStatSet) {
+        if (aStatSet.getAttribute() != LIFETIME) {
+            return false;
+        }
+        return aStatSet.getStatistic(WINS).getValue() >= THRESHOLD;
     }
 
     @Override

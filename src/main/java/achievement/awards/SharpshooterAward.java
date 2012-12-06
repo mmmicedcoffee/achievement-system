@@ -1,19 +1,24 @@
 package achievement.awards;
 
 import achievement.Achievement;
-import statistic.StatisticSet;
-import statistic.constants.StatisticKey;
+import statistic.StatSet;
 
-import static statistic.constants.StatisticKey.NUM_ATTEMPTED_ATTACKS;
-import static statistic.constants.StatisticKey.NUM_HITS;
+import static statistic.constants.StatAttribute.GAME;
+import static statistic.constants.StatKey.ATTEMPTED_HITS;
+import static statistic.constants.StatKey.HITS;
 
 public class SharpshooterAward implements Achievement {
+    public static final double THRESHOLD = 0.75;
+
     @Override
-    public boolean evaluate(StatisticSet aStatisticSet) {
-        final int attempted = aStatisticSet.getStatistic(NUM_ATTEMPTED_ATTACKS).getValue();
+    public boolean evaluate(StatSet aStatSet) {
+        if (aStatSet.getAttribute() != GAME) {
+            return false;
+        }
+        final int attempted = aStatSet.getStatistic(ATTEMPTED_HITS).getValue();
         if (attempted == 0) return false;
-        final int hit = aStatisticSet.getStatistic(NUM_HITS).getValue();
-        return (hit / (float) attempted) >= 0.75;
+        final int hit = aStatSet.getStatistic(HITS).getValue();
+        return (hit / (float) attempted) >= THRESHOLD;
     }
 
     @Override

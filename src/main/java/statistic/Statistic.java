@@ -1,12 +1,12 @@
 package statistic;
 
-import statistic.constants.StatisticKey;
+import statistic.constants.StatKey;
 
 public class Statistic {
-    private final StatisticKey id;
+    private final StatKey id;
     private int value;
 
-    public Statistic(StatisticKey id, int initialValue) {
+    public Statistic(StatKey id, int initialValue) {
         this.id = id;
         this.value = initialValue;
     }
@@ -16,7 +16,7 @@ public class Statistic {
         this.value += stat.getValue();
     }
 
-    public StatisticKey getId() {
+    public StatKey getId() {
         return id;
     }
 

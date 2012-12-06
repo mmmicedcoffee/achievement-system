@@ -1,39 +1,46 @@
 package statistic;
 
-import statistic.constants.StatisticKey;
+import statistic.constants.StatAttribute;
+import statistic.constants.StatKey;
 
 import java.util.Iterator;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
-import static statistic.constants.StatisticParameters.INITIAL_STAT_VALUE;
+import static statistic.constants.StatParameters.INITIAL_STAT_VALUE;
 
-public class StatisticSet implements Iterable<Statistic> {
-    private Map<StatisticKey, Statistic> statistics;
+public class StatSet implements Iterable<Statistic> {
+    private final StatAttribute attribute;
+    private Map<StatKey, Statistic> statistics;
 
-    public StatisticSet() {
+    public StatSet(StatAttribute attribute) {
+        this.attribute = attribute;
         init();
     }
 
     private void init() {
         statistics = newHashMap();
-        for (StatisticKey stat : StatisticKey.values()) {
+        for (StatKey stat : StatKey.values()) {
             statistics.put(stat, new Statistic(stat, INITIAL_STAT_VALUE));
         }
     }
 
-    public void update(StatisticKey key, int value) {
+    public void update(StatKey key, int value) {
         this.update(new Statistic(key, value));
     }
 
     public void update(Statistic stat) {
-        final StatisticKey statId = stat.getId();
+        final StatKey statId = stat.getId();
         statistics.get(statId).update(stat);
     }
 
-    public Statistic getStatistic(StatisticKey statId) {
+    public Statistic getStatistic(StatKey statId) {
         assert (statistics.containsKey(statId));
         return statistics.get(statId);
+    }
+
+    public StatAttribute getAttribute() {
+        return attribute;
     }
 
     @Override
@@ -45,7 +52,7 @@ public class StatisticSet implements Iterable<Statistic> {
     public String toString() {
         String statisticsString = "";
 
-        for (StatisticKey statKey : StatisticKey.values()) {
+        for (StatKey statKey : StatKey.values()) {
             final Statistic stat = statistics.get(statKey);
             statisticsString += stat.getId().toString() + ": " + String.valueOf(stat.getValue()) + "\n";
         }

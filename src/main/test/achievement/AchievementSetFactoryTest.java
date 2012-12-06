@@ -8,6 +8,7 @@ import java.util.HashSet;
 import static org.junit.Assert.assertEquals;
 
 public class AchievementSetFactoryTest {
+    private static final int NUM_ACHIEVEMENTS = 4;
     private AchievementSetFactory testFactory;
 
     @Before
@@ -18,6 +19,6 @@ public class AchievementSetFactoryTest {
     @Test
     public void testAchievementSetFactory() {
         HashSet<Achievement> achievements = testFactory.createFullAchievementSet();
-        assertEquals(4, achievements.size());
+        assertEquals(NUM_ACHIEVEMENTS, achievements.size());
     }
 }

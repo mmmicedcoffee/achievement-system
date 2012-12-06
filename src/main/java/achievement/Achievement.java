@@ -1,9 +1,9 @@
 package achievement;
 
-import statistic.StatisticSet;
+import statistic.StatSet;
 
 public interface Achievement {
-    boolean evaluate(StatisticSet aStatisticSet);
+    boolean evaluate(StatSet aStatSet);
 
     void claim();
 }

@@ -1,14 +1,20 @@
 package achievement.awards;
 
 import achievement.Achievement;
-import statistic.StatisticSet;
+import statistic.StatSet;
 
-import static statistic.constants.StatisticKey.DMG_DONE;
+import static statistic.constants.StatAttribute.GAME;
+import static statistic.constants.StatKey.DMG_DONE;
 
 public class BruiserAward implements Achievement {
+    public static final int THRESHOLD = 500;
+
     @Override
-    public boolean evaluate(StatisticSet aStatisticSet) {
-        return aStatisticSet.getStatistic(DMG_DONE).getValue() > 500d;
+    public boolean evaluate(StatSet aStatSet) {
+        if (aStatSet.getAttribute() != GAME) {
+            return false;
+        }
+        return aStatSet.getStatistic(DMG_DONE).getValue() > THRESHOLD;
     }
 
     @Override

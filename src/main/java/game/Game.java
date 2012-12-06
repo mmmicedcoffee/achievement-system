@@ -1,63 +1,63 @@
 package game;
 
-import statistic.StatisticSet;
-import statistic.StatisticSetFactory;
+import statistic.StatSet;
+import statistic.StatSetFactory;
 
 import java.util.Random;
 
-import static statistic.constants.StatisticParameters.MIN_TIME_PLAYED;
-import static statistic.constants.StatisticParameters.MAX_TIME_PLAYED;
+import static statistic.constants.StatParameters.MAX_TIME_PLAYED;
 
 public class Game {
     private final Team teamA;
     private final Team teamB;
     private final int teamSize;
+    private boolean verbose = false;
 
     public Game(Team teamA, Team teamB) {
-        assert(teamA.getSize() == teamB.getSize());
+        assert (teamA.getSize() == teamB.getSize());
         this.teamA = teamA;
         this.teamB = teamB;
         this.teamSize = teamA.getSize();
     }
 
-    public void playGame() {
+    public void playGame() throws Exception {
+        System.out.println("NEW GAME");
+        System.out.println("--------");
         final Random random = new Random();
-        final StatisticSetFactory factory = new StatisticSetFactory();
+        final StatSetFactory factory = new StatSetFactory();
         // generate a winner
         final boolean winnerA = random.nextBoolean();
+        Team winner;
+        Team loser;
+        if (winnerA) {
+            winner = teamA;
+            loser = teamB;
+        } else {
+            winner = teamB;
+            loser = teamA;
+        }
 
         // generate length of game
         final int gameLength = random.nextInt(MAX_TIME_PLAYED);
 
-        // TODO: in need of refactoring!
-        if (winnerA) {
-            for (int i = 0; i < teamSize; i++) {
-                final StatisticSet statistics = factory.generateStats(true, gameLength);
-                System.out.println("TEAM " + teamA.getName() + " " + teamA.getPlayers()[i].getName());
+        // update winner stats
+        for (int i = 0; i < teamSize; i++) {
+            final StatSet statistics = factory.generateRandomGameStats(true, gameLength);
+            if (verbose) {
+                System.out.println("TEAM " + winner.getName() + " " + winner.getPlayers()[i].getName());
                 System.out.println(statistics.toString());
-                teamA.updateStatsForPlayer(i, statistics);
             }
+            winner.updateStatsForPlayer(i, statistics);
+        }
 
-            for (int i = 0; i < teamSize; i++) {
-                final StatisticSet statistics = factory.generateStats(false, gameLength);
-                System.out.println("TEAM " + teamB.getName() + " " + teamB.getPlayers()[i].getName());
+        // update loser stats
+        for (int i = 0; i < teamSize; i++) {
+            final StatSet statistics = factory.generateRandomGameStats(false, gameLength);
+            if (verbose) {
+                System.out.println("TEAM " + loser.getName() + " " + loser.getPlayers()[i].getName());
                 System.out.println(statistics.toString());
-                teamB.updateStatsForPlayer(i, statistics);
             }
-        } else {
-            for (int i = 0; i < teamSize; i++) {
-                final StatisticSet statistics = factory.generateStats(true, gameLength);
-                System.out.println("TEAM " + teamB.getName() + " " + teamB.getPlayers()[i].getName());
-                System.out.println(statistics.toString());
-                teamB.updateStatsForPlayer(i, statistics);
-            }
-
-            for (int i = 0; i < teamSize; i++) {
-                final StatisticSet statistics = factory.generateStats(false, gameLength);
-                System.out.println("TEAM " + teamA.getName() + " " + teamA.getPlayers()[i].getName());
-                System.out.println(statistics.toString());
-                teamA.updateStatsForPlayer(i, statistics);
-            }
+            loser.updateStatsForPlayer(i, statistics);
         }
 
         // evaluate achievements for each player
@@ -74,5 +74,13 @@ public class Game {
         for (Player p : teamB.getPlayers()) {
             p.evaluateAchievements();
         }
+    }
+
+    public boolean isVerbose() {
+        return verbose;
+    }
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
     }
 }

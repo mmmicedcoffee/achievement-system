@@ -6,11 +6,20 @@ public class Main {
     private static final int TEAM_SIZE = 5;
     private static final String TEAM_A_NAME = "A";
     private static final String TEAM_B_NAME = "B";
+    private static final int NUM_GAMES = 10;
 
     public static void main(String[] args) {
         // make a game
         Game game = new Game(createTeam(TEAM_A_NAME, TEAM_SIZE), createTeam(TEAM_B_NAME, TEAM_SIZE));
+
         // play a game - should update stats
-        game.playGame();
+        try {
+            for (int i = 0; i < NUM_GAMES; i++) {
+                game.playGame();
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to play game.");
+            e.printStackTrace();
+        }
     }
 }

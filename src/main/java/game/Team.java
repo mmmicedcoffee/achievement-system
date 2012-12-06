@@ -1,6 +1,6 @@
 package game;
 
-import statistic.StatisticSet;
+import statistic.StatSet;
 
 import static game.Player.createPlayer;
 
@@ -21,7 +21,7 @@ public class Team {
         return new Team(name, somePlayers);
     }
 
-    public void updateStatsForPlayer(int playerIndex, StatisticSet statistics) {
+    public void updateStatsForPlayer(int playerIndex, StatSet statistics) {
         players[playerIndex].updateStats(statistics);
     }
 
